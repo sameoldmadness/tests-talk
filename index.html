@@ -53,9 +53,10 @@
 		</style>
 	</section>
 	<section class="slide">
-		<p class="shout">Swift</p>
+		<p class="shout">😻 Swift 😻</p>
 	</section>
 	<section class="slide">
+		<h2>Ожидание vs. реальность</h2>
 		<ul>
 			<li>ObjectiveC</li>
 			<li>Foundation</li>
@@ -63,6 +64,7 @@
 			<li>Profiles and certificates</li>
 			<li>TestFlight and AppStore</li>
 			<li>CoreData</li>
+			<li>CocoaPods and Carthage</li>
 		</ul>
 	</section>
 	<section class="slide">
@@ -70,7 +72,7 @@
 	</section>
 	<section class="slide">
 		<img src="img/testfirst.jpg" alt="" class="place right" style="margin-right: 50px; width: 400px;">
-		<h2>Плюсы</h2>
+		<h2>Test-first development</h2>
 		<ul>
 			<li>высокая скорость разработки</li>
 			<li>уверенность при внесении изменений</li>
@@ -83,6 +85,7 @@
 		<p>2 515 123 яблока</p>
 	</section>
 	<section class="slide">
+		<h2>Интерфейс</h2>
 		<pre><code>let apple = Word(one: "яблоко",
 				some: "яблока",
 				many: "яблок")
@@ -92,10 +95,10 @@ morph(word: apple, forAmount: 2) <span class="comment">// яблока</span>
 morph(word: apple, forAmount: 5) <span class="comment">// яблок</span></code></pre>
 	</section>
 	<section class="slide">
+		<h2>Заглушка</h2>
 		<pre><code>struct Word { let one, some, many: String }
-
 func morph(word: Word, forAmount amount: Int) -> String {
-	return "яблок"
+	return word.many
 }
 <p class="next">
 morph(word: apple, forAmount: 1) == "яблоко" <span class="comment">// false</span>
@@ -104,6 +107,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 </p></code></pre>
 	</section>
 	<section class="slide">
+		<h2>Наводим красоту</h2>
 		<pre><code>func 🎯(_ expression: Bool) -> String {
 	return expression ? "🍏" : "🍎"
 }
@@ -127,6 +131,17 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	</section>
 	<section class="slide">
 		<h2 class="shout">Legacy</h2>
+	</section>
+	<section class="slide">
+		<h2>Задача: исправить ошибку</h2>
+		<pre><code>@interface YABaseViewController : UIViewController
+
+-(NSString *)errorTextFromError:(NSError *)error;
+
+@end
+
+<span class="comment">// Отсутствует подключение к интернету.</span>
+</code></pre>
 	</section>
 	<section class="slide">
 		<style>
@@ -168,6 +183,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 		<img src="img/target.png" alt="" class="cover">
 	</section>
 	<section class="slide">
+		<h2>Простейший тест</h2>
 		<pre><code>import XCTest
 
 class YaAviaTests: XCTestCase {
@@ -181,7 +197,7 @@ class YaAviaTests: XCTestCase {
 	<section class="slide">
 		<img src="img/run.png" alt="" class="place">
 	</section>
-	<section class="slide">
+	<!-- <section class="slide">
 		<pre><code>import XCTest
 import YaAvia
 
@@ -190,14 +206,14 @@ class YaAviaTests: XCTestCase {
 		let vc = YaAviaBaseController()
 	}
 }</code></pre>
-	</section>
-	<section class="slide">
+	</section> -->
+	<!-- <section class="slide">
 		<img src="img/unresolved.png" alt="" class="place top" style="margin-top: 150px">
 		<img src="img/addtarget.png" alt="" class="place bottom next" style="margin-bottom: 150px">
-	</section>
+	</section> -->
 	<section class="slide">
-		<pre><code>import XCTest
-@testable import YaAvia
+		<h2>Тестируем приложение</h2>
+		<pre><code>@testable import YaAvia
 
 class YaAviaTests: XCTestCase {
 	func testDefaultError() {
@@ -206,26 +222,26 @@ class YaAviaTests: XCTestCase {
 }</code></pre>
 	</section>
 	<section class="slide">
-		<pre><code>class YaAviaTests: XCTestCase {
-	func testDefaultError() {
-		let vc = YaAviaBaseController()
-		let actual = vs.errorText(fromError: NSError())
-		let expected = "Нет соединения с интернетом"
+		<h2>Структура теста</h2>
+		<pre><code>func testDefaultError() {
+	let vc = YaAviaBaseController()
+	let actual = vs.errorText(fromError: NSError())
+	let expected = "Нет соединения с интернетом."
 
-		XCTAssertEqual(expected, actual)
-	}
+	XCTAssertEqual(expected, actual)
 }</code></pre>
 	</section>
 	<section class="slide">
 		<img src="img/manytests.png" alt="" class="place">
 	</section>
 	<section class="slide">
-		<img src="img/coverage.png" alt="" class="place">
+		<img src="img/coverage.png" alt="" class="cover">
 	</section>
 	<section class="slide">
 		<img src="img/redsection.png" alt="" class="place">
 	</section>
 	<section class="slide">
+		<h2>Переносим функциональность в Swift</h2>
 		<pre><code>extension NSError {
 	var localizedString: String {
 		...
@@ -237,6 +253,7 @@ error.localizedString
 </p></code></pre>
 	</section>
 	<section class="slide">
+		<h2>Используем код Swift в ObjC</h2>
 		<pre><code>#import "YaAvia-Swift.h"
 
 @implementation YABaseViewController
@@ -265,6 +282,14 @@ extension NSError {
 		}
 	}
 }</code></pre>
+	</section>
+	<section class="slide">
+		<h2>Тесты</h2>
+		<ul>
+			<li class="next">Позволяют относиться к коду как к "чёрному ящику"</li>
+			<li class="next">Добавляют уверенности при внесении изменений</li>
+			<li class="next">Ускоряют разработку</li>
+		</ul>
 	</section>
 	<section class="slide" id="last">
 		<style>
