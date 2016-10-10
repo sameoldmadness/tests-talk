@@ -53,7 +53,34 @@
 		</style>
 	</section>
 	<section class="slide">
-		<h2 class="shout">TDD</h2>
+		<p class="shout">Swift</p>
+	</section>
+	<section class="slide">
+		<ul>
+			<li>ObjectiveC</li>
+			<li>Foundation</li>
+			<li>Xcode</li>
+			<li>Profiles and certificates</li>
+			<li>TestFlight and AppStore</li>
+			<li>CoreData</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2 class="shout">test-first</h2>
+	</section>
+	<section class="slide">
+		<img src="img/testfirst.jpg" alt="" class="place right" style="margin-right: 50px; width: 400px;">
+		<h2>Плюсы</h2>
+		<ul>
+			<li>высокая скорость разработки</li>
+			<li>уверенность при внесении изменений</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Задача: выбор формы слова</h2>
+		<p>1 яблоко</p>
+		<p>5 яблок</p>
+		<p>2 515 123 яблока</p>
 	</section>
 	<section class="slide">
 		<pre><code>let apple = Word(one: "яблоко",
@@ -68,7 +95,7 @@ morph(word: apple, forAmount: 5) <span class="comment">// яблок</span></cod
 		<pre><code>struct Word { let one, some, many: String }
 
 func morph(word: Word, forAmount amount: Int) -> String {
-    return "яблок"
+	return "яблок"
 }
 <p class="next">
 morph(word: apple, forAmount: 1) == "яблоко" <span class="comment">// false</span>
@@ -78,19 +105,19 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	</section>
 	<section class="slide">
 		<pre><code>func 🎯(_ expression: Bool) -> String {
-    return expression ? "🍏" : "🍎"
+	return expression ? "🍏" : "🍎"
 }
 <p class="next">
 🎯(morph(word: apple, forAmount: 1) == "яблоко") <span class="comment">// 🍎</span>
 🎯(morph(word: apple, forAmount: 2) == "яблока") <span class="comment">// 🍎</span>
 🎯(morph(word: apple, forAmount: 5) == "яблок")  <span class="comment">// 🍏</span>
-</p>
+</p></code></pre>
 	</section>
 	<section class="slide">
 		<pre><code>func morph(word: Word, forAmount amount: Int) -> String {
-    switch amount { case 1:     return word.one
-                    case 2...4: return word.one
-                    default:    return word.many }
+	switch amount { case 1:     return word.one
+					case 2...4: return word.one
+					default:    return word.many }
 }
 
 🎯(morph(word: apple, forAmount: 1) == "яблоко") <span class="comment">// 🍏</span>
@@ -104,30 +131,30 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	<section class="slide">
 		<style>
 			code.dense {
-			    font-size: 0.6em;
-			    line-height: 1.7 !important;
+				font-size: 0.6em;
+				line-height: 1.7 !important;
 			}
 		</style>
 		<pre><code class="dense">- (NSString *)errorTextFromError:(NSError *)error {
-    NSString *errorDescriptionString = [[NSString alloc] init];
-    NSString* userInfo = [error.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"];
-    if (userInfo) {
-        NSData* userData = [userInfo dataUsingEncoding:NSUTF8StringEncoding];
-        if (userData) {
-            NSError* parseError = nil;
-            NSDictionary* errorObject = (NSDictionary*)[RKNSJSONSerialization objectFromData:userData error:&parseError];
-            if (errorObject) {
-                NSDictionary* dictError = [errorObject objectForKey:@"data"];
-                if (dictError) {
-                    NSDictionary *descriptionDict = [dictError objectForKey:@"description"];
-                    if (descriptionDict && [[descriptionDict class] isSubclassOfClass:[NSDictionary class]]) {
-                        NSArray *errorsDict = [descriptionDict objectForKey:@"errors"];
-                        if (errorsDict) {
-                            for (NSDictionary* dict in errorsDict) {
-                                NSArray *errorArray = [dict objectForKey:@"error"];
-                                if (errorArray) {
-                                    NSMutableString *mutableString = [[NSMutableString alloc] init];
-                                    if ([errorArray count] > 0 && [errorArray[0] isEqualToString:@"flights"]) {</code></pre>
+	NSString *errorDescriptionString = [[NSString alloc] init];
+	NSString* userInfo = [error.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"];
+	if (userInfo) {
+		NSData* userData = [userInfo dataUsingEncoding:NSUTF8StringEncoding];
+		if (userData) {
+			NSError* parseError = nil;
+			NSDictionary* errorObject = (NSDictionary*)[RKNSJSONSerialization objectFromData:userData error:&parseError];
+			if (errorObject) {
+				NSDictionary* dictError = [errorObject objectForKey:@"data"];
+				if (dictError) {
+					NSDictionary *descriptionDict = [dictError objectForKey:@"description"];
+					if (descriptionDict && [[descriptionDict class] isSubclassOfClass:[NSDictionary class]]) {
+						NSArray *errorsDict = [descriptionDict objectForKey:@"errors"];
+						if (errorsDict) {
+							for (NSDictionary* dict in errorsDict) {
+								NSArray *errorArray = [dict objectForKey:@"error"];
+								if (errorArray) {
+									NSMutableString *mutableString = [[NSMutableString alloc] init];
+									if ([errorArray count] > 0 && [errorArray[0] isEqualToString:@"flights"]) {</code></pre>
 	</section>
 	<section class="slide">
 		<h2>Хитрый план</h2>
@@ -144,10 +171,10 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 		<pre><code>import XCTest
 
 class YaAviaTests: XCTestCase {
-    func testExample() {
+	func testExample() {
 		<span class="next">XCTAssert(2 + 2 == 4)</span>
 		<span class="next">XCTAssert(2 + 2 == 5)</span>
-    }
+	}
 }
 </code></pre>
 	</section>
@@ -159,9 +186,9 @@ class YaAviaTests: XCTestCase {
 import YaAvia
 
 class YaAviaTests: XCTestCase {
-    func testDefaultError() {
-    	let vc = YaAviaBaseController()
-    }
+	func testDefaultError() {
+		let vc = YaAviaBaseController()
+	}
 }</code></pre>
 	</section>
 	<section class="slide">
@@ -173,20 +200,20 @@ class YaAviaTests: XCTestCase {
 @testable import YaAvia
 
 class YaAviaTests: XCTestCase {
-    func testDefaultError() {
-    	let vc = YaAviaBaseController()
-    }
+	func testDefaultError() {
+		let vc = YaAviaBaseController()
+	}
 }</code></pre>
 	</section>
 	<section class="slide">
 		<pre><code>class YaAviaTests: XCTestCase {
-    func testDefaultError() {
-    	let vc = YaAviaBaseController()
-    	let actual = vs.errorText(fromError: NSError())
-    	let expected = "Нет соединения с интернетом"
+	func testDefaultError() {
+		let vc = YaAviaBaseController()
+		let actual = vs.errorText(fromError: NSError())
+		let expected = "Нет соединения с интернетом"
 
 		XCTAssertEqual(expected, actual)
-    }
+	}
 }</code></pre>
 	</section>
 	<section class="slide">
@@ -221,22 +248,22 @@ error.localizedString
 	<section class="slide">
 		<pre><code class="dense">
 extension NSError {
-    var localizedString: String {
-        guard let responseData = self.userInfo["NSLocalizedRecoverySuggestion"] as? Data else {
-            return ls("txt_error_connection_failed")
-        }
+	var localizedString: String {
+		guard let responseData = self.userInfo["NSLocalizedRecoverySuggestion"] as? Data else {
+			return ls("txt_error_connection_failed")
+		}
 
-        guard let json = try? JSONSerialization.jsonObject(with: responseData, options: []),
-            let description = ErrorDescription(json: json) else {
-                return ls("txt_error_connection_server_problem")
-        }
+		guard let json = try? JSONSerialization.jsonObject(with: responseData, options: []),
+			let description = ErrorDescription(json: json) else {
+				return ls("txt_error_connection_server_problem")
+		}
 
-        switch description {
-        case .UnknownFlightNumber: return ls("add_flight_unknown_flight_number")
-        case .IncorrectFlightNumber: return ls("add_flight_incorrect_flight_number")
-        case .ServerManaged(let reasons): return reasons.joined(separator: " ")
-        }
-    }
+		switch description {
+		case .UnknownFlightNumber: return ls("add_flight_unknown_flight_number")
+		case .IncorrectFlightNumber: return ls("add_flight_incorrect_flight_number")
+		case .ServerManaged(let reasons): return reasons.joined(separator: " ")
+		}
+	}
 }</code></pre>
 	</section>
 	<section class="slide" id="last">
