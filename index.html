@@ -6,6 +6,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="vendor/shower-ribbon/styles/screen-16x10.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/github-gist.min.css">
 </head>
 <body class="shower list">
 	<header class="caption">
@@ -86,7 +87,7 @@
 	</section>
 	<section class="slide">
 		<h2>Интерфейс</h2>
-		<pre><code>let apple = Word(one: "яблоко",
+		<pre><code class="swift">let apple = Word(one: "яблоко",
 				some: "яблока",
 				many: "яблок")
 
@@ -96,7 +97,7 @@ morph(word: apple, forAmount: 5) <span class="comment">// яблок</span></cod
 	</section>
 	<section class="slide">
 		<h2>Заглушка</h2>
-		<pre><code>struct Word { let one, some, many: String }
+		<pre><code class="swift">struct Word { let one, some, many: String }
 func morph(word: Word, forAmount amount: Int) -> String {
 	return word.many
 }
@@ -108,7 +109,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	</section>
 	<section class="slide">
 		<h2>Наводим красоту</h2>
-		<pre><code>func 🎯(_ expression: Bool) -> String {
+		<pre><code class="swift">func 🎯(_ expression: Bool) -> String {
 	return expression ? "🍏" : "🍎"
 }
 <p class="next">
@@ -118,7 +119,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 </p></code></pre>
 	</section>
 	<section class="slide">
-		<pre><code>func morph(word: Word, forAmount amount: Int) -> String {
+		<pre><code class="swift">func morph(word: Word, forAmount amount: Int) -> String {
 	switch amount { case 1:     return word.one
 					case 2...4: return word.one
 					default:    return word.many }
@@ -134,7 +135,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	</section>
 	<section class="slide">
 		<h2>Задача: исправить ошибку</h2>
-		<pre><code>@interface YABaseViewController : UIViewController
+		<pre><code class="objectivec">@interface YABaseViewController : UIViewController
 
 -(NSString *)errorTextFromError:(NSError *)error;
 
@@ -150,7 +151,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 				line-height: 1.7 !important;
 			}
 		</style>
-		<pre><code class="dense">- (NSString *)errorTextFromError:(NSError *)error {
+		<pre><code class="objectivec dense">- (NSString *)errorTextFromError:(NSError *)error {
 	NSString *errorDescriptionString = [[NSString alloc] init];
 	NSString* userInfo = [error.userInfo objectForKey:@"NSLocalizedRecoverySuggestion"];
 	if (userInfo) {
@@ -184,7 +185,7 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 	</section>
 	<section class="slide">
 		<h2>Простейший тест</h2>
-		<pre><code>import XCTest
+		<pre><code class="swift">import XCTest
 
 class YaAviaTests: XCTestCase {
 	func testExample() {
@@ -198,7 +199,7 @@ class YaAviaTests: XCTestCase {
 		<img src="img/run.png" alt="" class="place">
 	</section>
 	<!-- <section class="slide">
-		<pre><code>import XCTest
+		<pre><code class="swift">import XCTest
 import YaAvia
 
 class YaAviaTests: XCTestCase {
@@ -213,7 +214,7 @@ class YaAviaTests: XCTestCase {
 	</section> -->
 	<section class="slide">
 		<h2>Тестируем приложение</h2>
-		<pre><code>@testable import YaAvia
+		<pre><code class="swift">@testable import YaAvia
 
 class YaAviaTests: XCTestCase {
 	func testDefaultError() {
@@ -223,7 +224,7 @@ class YaAviaTests: XCTestCase {
 	</section>
 	<section class="slide">
 		<h2>Структура теста</h2>
-		<pre><code>func testDefaultError() {
+		<pre><code class="swift">func testDefaultError() {
 	let vc = YaAviaBaseController()
 	let actual = vs.errorText(fromError: NSError())
 	let expected = "Нет соединения с интернетом."
@@ -235,6 +236,10 @@ class YaAviaTests: XCTestCase {
 		<img src="img/manytests.png" alt="" class="place">
 	</section>
 	<section class="slide">
+		<h2>Code coverage</h2>
+		<p>Определение : )</p>
+	</section>
+	<section class="slide">
 		<img src="img/coverage.png" alt="" class="cover">
 	</section>
 	<section class="slide">
@@ -242,7 +247,7 @@ class YaAviaTests: XCTestCase {
 	</section>
 	<section class="slide">
 		<h2>Переносим функциональность в Swift</h2>
-		<pre><code>extension NSError {
+		<pre><code class="swift">extension NSError {
 	var localizedString: String {
 		...
 	}
@@ -254,7 +259,7 @@ error.localizedString
 	</section>
 	<section class="slide">
 		<h2>Используем код Swift в ObjC</h2>
-		<pre><code>#import "YaAvia-Swift.h"
+		<pre><code class="objectivec">#import "YaAvia-Swift.h"
 
 @implementation YABaseViewController
 - (NSString *)errorTextFromError:(NSError *)error {
@@ -263,7 +268,7 @@ error.localizedString
 @end</code></pre>
 	</section>
 	<section class="slide">
-		<pre><code class="dense">
+		<pre><code class="swift dense">
 extension NSError {
 	var localizedString: String {
 		guard let responseData = self.userInfo["NSLocalizedRecoverySuggestion"] as? Data else {
@@ -310,6 +315,10 @@ extension NSError {
 		-->
 	<div class="progress"></div>
 	<script src="vendor/shower-core/shower.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/languages/swift.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/languages/objectivec.min.jss"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 	<!-- Copyright © 2015 Yours Truly, Famous Inc. -->
 	<!-- Photos by John Carey, fiftyfootshadows.net -->
 </body>
