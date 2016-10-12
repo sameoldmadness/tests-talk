@@ -54,7 +54,7 @@
 		</style>
 	</section>
 	<section class="slide">
-		<p class="shout">😻 Swift 😻</p>
+		<img src="img/swift.svg" alt="" class="place">
 	</section>
 	<section class="slide">
 		<h2>Ожидание vs. реальность</h2>
@@ -69,18 +69,20 @@
 		</ul>
 	</section>
 	<section class="slide">
-		<h2 class="shout">test-first</h2>
-	</section>
-	<section class="slide">
-		<img src="img/testfirst.jpg" alt="" class="place right" style="margin-right: 50px; width: 400px;">
+		<figure class="place right">
+			<img src="img/testfirst.jpg" alt="" style="margin-right: 50px; width: 400px;">
+			<figcaption style="text-align: center; font-size: 0.7em;">&copy; U-QASAR</figcaption>
+		</figure>
 		<h2>Test-first development</h2>
-		<ul>
-			<li>высокая скорость разработки</li>
-			<li>уверенность при внесении изменений</li>
-		</ul>
+		<ol>
+			<li>Написать падающий тест</li>
+			<li>Починить тест</li>
+			<li>Если нужно, отрефакторить</li>
+			<li>GOTO 1</li>
+		</ol>
 	</section>
 	<section class="slide">
-		<h2>Задача: выбор формы слова</h2>
+		<h2>Задача: выбрать форму слова</h2>
 		<p>1 яблоко</p>
 		<p>5 яблок</p>
 		<p>2 515 123 яблока</p>
@@ -100,23 +102,16 @@ morph(word: apple, forAmount: 5) <span class="comment">// яблок</span></cod
 		<pre><code class="swift">struct Word { let one, some, many: String }
 func morph(word: Word, forAmount amount: Int) -> String {
 	return word.many
-}
-<p class="next">
-morph(word: apple, forAmount: 1) == "яблоко" <span class="comment">// false</span>
-morph(word: apple, forAmount: 2) == "яблока" <span class="comment">// false</span>
-morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true</span>
-</p></code></pre>
+}</code></pre>
+<img src="img/truefalse.png" alt="" class="next">
 	</section>
 	<section class="slide">
 		<h2>Наводим красоту</h2>
-		<pre><code class="swift">func 🎯(_ expression: Bool) -> String {
-	return expression ? "🍏" : "🍎"
-}
-<p class="next">
-🎯(morph(word: apple, forAmount: 1) == "яблоко") <span class="comment">// 🍎</span>
-🎯(morph(word: apple, forAmount: 2) == "яблока") <span class="comment">// 🍎</span>
-🎯(morph(word: apple, forAmount: 5) == "яблок")  <span class="comment">// 🍏</span>
-</p></code></pre>
+		<pre><code class="swift">infix operator ≡
+func ≡(this: String, that: String) -> UIColor {
+    return this == that ? .green : .red
+}</code></pre>
+<img src="img/uicolor.png" alt="" class="next">
 	</section>
 	<section class="slide">
 		<pre><code class="swift">func morph(word: Word, forAmount amount: Int) -> String {
@@ -125,13 +120,10 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 					default:    return word.many }
 }
 
-🎯(morph(word: apple, forAmount: 1) == "яблоко") <span class="comment">// 🍏</span>
-🎯(morph(word: apple, forAmount: 2) == "яблока") <span class="comment">// 🍏</span>
-🎯(morph(word: apple, forAmount: 5) == "яблок")  <span class="comment">// 🍏</span>
+morph(word: apple, forAmount: 1) ≡ "яблоко" <span class="comment">// 🍏</span>
+morph(word: apple, forAmount: 2) ≡ "яблока" <span class="comment">// 🍏</span>
+morph(word: apple, forAmount: 5) ≡ "яблок"  <span class="comment">// 🍏</span>
 </code></pre>
-	</section>
-	<section class="slide">
-		<h2 class="shout">Legacy</h2>
 	</section>
 	<section class="slide">
 		<h2>Задача: исправить ошибку</h2>
@@ -188,9 +180,9 @@ morph(word: apple, forAmount: 5) == "яблок"  <span class="comment">// true<
 		<pre><code class="swift">import XCTest
 
 class YaAviaTests: XCTestCase {
-	func testExample() {
-		<span class="next">XCTAssert(2 + 2 == 4)</span>
-		<span class="next">XCTAssert(2 + 2 == 5)</span>
+	func testExample() {<span class="next">
+		XCTAssert(2 + 2 == 4)
+		XCTAssert(2 + 2 == 5)</span>
 	}
 }
 </code></pre>
@@ -237,7 +229,10 @@ class YaAviaTests: XCTestCase {
 	</section>
 	<section class="slide">
 		<h2>Code coverage</h2>
-		<p>Определение : )</p>
+		<figure>
+			<blockquote><p>In computer science, code coverage is a measure used to describe the degree to which the source code of a program is tested by a particular test suite.</p><p>A program with high code coverage has been more thoroughly tested and has a lower chance of containing software bugs than a program with low code coverage.</p></blockquote>
+			<figcaption><a href="https://phpunit.de/manual/current/en/code-coverage-analysis.html">PHPUnit Manual</a></figcaption>
+		</figure>
 	</section>
 	<section class="slide">
 		<img src="img/coverage.png" alt="" class="cover">
